@@ -2,10 +2,13 @@ package com.cms.main.service;
 
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.main.Repository.ContactRepository;
+import com.cms.main.exception.ItemNotFoundException;
 import com.cms.main.model.Contact;
 
 @Service
@@ -23,7 +26,7 @@ public class ContactService {
 	}
 
 	public Contact getById(Long id) {
-		return repo.findById(id).orElseThrow();
+		return repo.findById(id).orElseThrow(() -> new ItemNotFoundException("Contact not found"));
 	}
 
 	public Contact update(Long id, Contact updated) {
