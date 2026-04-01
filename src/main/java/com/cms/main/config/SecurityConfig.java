@@ -21,10 +21,17 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+//	@Bean
+//	public UserDetailsService users(PasswordEncoder encoder) {
+//
+//		UserDetails user = User.builder().username("admin").password(encoder.encode("admin123")).roles("USER").build();
+//
+//		return new InMemoryUserDetailsManager(user);
+//	}
 	@Bean
 	public UserDetailsService users(PasswordEncoder encoder) {
 
-		UserDetails user = User.builder().username("admin").password(encoder.encode("admin123")).roles("USER").build();
+		UserDetails user = User.withUsername("admin").password("{nopes}admin123").roles("USER").build();
 
 		return new InMemoryUserDetailsManager(user);
 	}
